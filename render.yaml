@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: recyclable-sorting-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MODEL_PATH
+        value: waste_sorting_model.keras
+      - key: MAX_FILE_SIZE_MB
+        value: "5"
+      - key: CORS_ORIGINS
+        sync: false
+      - key: PYTHON_VERSION
+        value: "3.12.8"
